@@ -1,6 +1,6 @@
 ﻿open System
 open System.IO
-
+//allo coco
 let printMeanScores (row:string)  =
     let elements = row.Split('\t')
     let name =elements[0]
