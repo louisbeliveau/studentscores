@@ -1,6 +1,13 @@
 ﻿open System
 open System.IO
 
+module Float=
+    let tryFromString s=
+        if s="N/A" then
+            None
+        else
+            Some(float s)
+
 type Student=
     {
         Name:string
@@ -17,7 +24,7 @@ module StudentModule=
         let scores =
             elements
             |> Array.skip 2
-            |> Array.map float
+            |> Array.choose Float.tryFromString
         let meanScore = scores |> Array.average
         let minScore = scores |> Array.min
         let maxScore = scores |> Array.max
