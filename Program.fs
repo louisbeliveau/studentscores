@@ -9,7 +9,7 @@ type Student=
         MinScore:float
         MaxScore:float
     }
-module Student=
+module StudentModule=
     let fromString(s:string)=
         let elements = s.Split('\t')
         let name =elements[0]
@@ -22,38 +22,39 @@ module Student=
         let minScore = scores |> Array.min
         let maxScore = scores |> Array.max
         {             
-           Id=id
-           Name=name
-           MeanScore=meanScore
-           MinScore=minScore
-           MaxScore=maxScore
+        Id=id
+        Name=name
+        MeanScore=meanScore
+        MinScore=minScore
+        MaxScore=maxScore
         }    
 
     let printSummary (student:Student)  =
         printfn "%s\t%s\t%0.1f\t%0.1f\t%0.1f" student.Name student.Id student.MeanScore student.MinScore student.MaxScore
 
-    let sumarize filepath=
-        let rows = File.ReadAllLines filepath
-        let studentcount = rows.Length - 1
-        printfn "Student count %i" studentcount
-        rows 
-        |> Array.skip 1
-        |> Array.iter Student.fromString
-    
+let sumarize (filepath:string)=
+    let rows = File.ReadAllLines filepath
+    let studentcount = rows.Length - 1
+    printfn "Student count %i" studentcount
+    rows 
+    |> Array.skip 1
+    |> Array.map StudentModule.fromString
+    |> Array.sortByDescending(fun student->student.MeanScore)
+    |> Array.iter StudentModule.printSummary    
 
-    [<EntryPoint>]
-    let main argv=
-        if argv.Length = 1 then
-            let filepath = argv[0] 
-            if File.Exists filepath then
-                printfn "Processing %s" filepath
-                sumarize filepath
-                0
-            else
-                printfn "the file doesnt even exits you freak"
-                1 
+[<EntryPoint>]
+let main argv=
+    if argv.Length = 1 then
+        let filepath = argv[0] 
+        if File.Exists filepath then
+            printfn "Processing %s" filepath
+            sumarize filepath
+            0
         else
-            printfn "Please specify a file"
-            2
+            printfn "the file doesnt even exits you freak"
+            1 
+    else
+        printfn "Please specify a file"
+        2
     
     
