@@ -1,7 +1,7 @@
 ﻿open System
 open System.IO
 
-type Student
+type Student=
     {
         Name:string
         Id:string
