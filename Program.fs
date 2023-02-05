@@ -32,28 +32,28 @@ module Student=
     let printSummary (student:Student)  =
         printfn "%s\t%s\t%0.1f\t%0.1f\t%0.1f" student.Name student.Id student.MeanScore student.MinScore student.MaxScore
 
-let sumarize filepath=
-    let rows = File.ReadAllLines filepath
-    let studentcount = rows.Length - 1
-    printfn "Student count %i" studentcount
-    rows 
-    |> Array.skip 1
-    |> Array.iter printMeanScore
+    let sumarize filepath=
+        let rows = File.ReadAllLines filepath
+        let studentcount = rows.Length - 1
+        printfn "Student count %i" studentcount
+        rows 
+        |> Array.skip 1
+        |> Array.iter Student.fromString
     
 
-[<EntryPoint>]
-let main argv=
-    if argv.Length = 1 then
-        let filepath = argv[0] 
-        if File.Exists filepath then
-            printfn "Processing %s" filepath
-            sumarize filepath
-            0
+    [<EntryPoint>]
+    let main argv=
+        if argv.Length = 1 then
+            let filepath = argv[0] 
+            if File.Exists filepath then
+                printfn "Processing %s" filepath
+                sumarize filepath
+                0
+            else
+                printfn "the file doesnt even exits you freak"
+                1 
         else
-            printfn "the file doesnt even exits you freak"
-            1 
-    else
-        printfn "Please specify a file"
-        2
+            printfn "Please specify a file"
+            2
     
     
