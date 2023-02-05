@@ -1,6 +1,15 @@
 ﻿open System
 open System.IO
 
+type Student
+    {
+        Name:string
+        Id:string
+        MeanScore:float
+        MinScore:float
+        MaxScore:float
+    }
+
 let printMeanScore (row:string)  =
     let elements = row.Split('\t')
     let name =elements[0]
