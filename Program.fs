@@ -9,18 +9,27 @@ type Student=
         MinScore:float
         MaxScore:float
     }
+module Student=
+    let fromString(s:string)=
+        let elements = s.Split('\t')
+        let name =elements[0]
+        let id=elements[1]
+        let scores =
+            elements
+            |> Array.skip 2
+            |> Array.map float
+        let meanScore = scores |> Array.average
+        let minScore = scores |> Array.min
+        let maxScore = scores |> Array.max
+        {            
+           Id=id
+           Name=name
+           MeanScore=meanScore
+           MinScore=minScore
+           MaxScore=maxScore
+        }    
 
 let printMeanScore (row:string)  =
-    let elements = row.Split('\t')
-    let name =elements[0]
-    let id=elements[1]
-    let scores =
-        elements
-        |> Array.skip 2
-        |> Array.map float
-    let meanScore = scores |> Array.average
-    let minScore = scores |> Array.min
-    let maxScore = scores |> Array.max    
     printfn "%s\t%s\t%0.1f\t%0.1f\t%0.1f" name id meanScore minScore maxScore
 
 let sumarize filepath=
