@@ -21,7 +21,7 @@ module Student=
         let meanScore = scores |> Array.average
         let minScore = scores |> Array.min
         let maxScore = scores |> Array.max
-        {            
+        {             
            Id=id
            Name=name
            MeanScore=meanScore
@@ -29,8 +29,8 @@ module Student=
            MaxScore=maxScore
         }    
 
-let printMeanScore (row:string)  =
-    printfn "%s\t%s\t%0.1f\t%0.1f\t%0.1f" name id meanScore minScore maxScore
+    let printSummary (student:Student)  =
+        printfn "%s\t%s\t%0.1f\t%0.1f\t%0.1f" student.Name student.Id student.MeanScore student.MinScore student.MaxScore
 
 let sumarize filepath=
     let rows = File.ReadAllLines filepath
