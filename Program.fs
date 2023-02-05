@@ -1,11 +1,16 @@
 ﻿open System
 open System.IO
-//allo coco
-let printMeanScores (row:string)  =
+
+let printMeanScore (row:string)  =
     let elements = row.Split('\t')
     let name =elements[0]
     let id=elements[1]
-    printfn "Id%s Name:%s" row
+    let meanScore =
+        elements
+        |> Array.skip 2
+        |> Array.map float
+        |> Array.average
+    printfn "%s\t%s\t%0.1f" name id meanScore
 
 let sumarize filepath=
     let rows = File.ReadAllLines filepath
@@ -13,7 +18,7 @@ let sumarize filepath=
     printfn "Student count %i" studentcount
     rows 
     |> Array.skip 1
-    |> Array.iter printMeanScoresprintfn "%s"
+    |> Array.iter printMeanScore
     
 
 [<EntryPoint>]
