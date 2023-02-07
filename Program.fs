@@ -11,7 +11,8 @@ module Float=
     
 type Student=
     {
-        Name:string
+        FName:string
+        LName:string
         Id:string
         MeanScore:float
         MinScore:float
@@ -20,7 +21,7 @@ type Student=
 module StudentModule=
     let fromString(s:string)=
         let elements = s.Split('\t')
-        let name =elements[0]
+        let name =elements[0].Split(",")
         let id=elements[1]
         let scores =
             elements
@@ -31,7 +32,8 @@ module StudentModule=
         let maxScore = scores |> Array.max
         {             
         Id=id
-        Name=name
+        FName=name[1]
+        LName=name[0]
         MeanScore=meanScore
         MinScore=minScore
         MaxScore=maxScore
@@ -43,7 +45,7 @@ module StudentModule=
     //     0
 
     let printSummary (student:Student)  =
-        printfn "%s\t%s\t%0.1f\t%0.1f\t%0.1f" student.Name student.Id student.MeanScore student.MinScore student.MaxScore
+        printfn "%s\t%s\t%s\t%0.1f\t%0.1f\t%0.1f" student.FName student.LName student.Id student.MeanScore student.MinScore student.MaxScore
 
 let sumarize (filepath:string)=
     let rows = File.ReadAllLines filepath
@@ -52,7 +54,7 @@ let sumarize (filepath:string)=
     rows 
     |> Array.skip 1
     |> Array.map StudentModule.fromString
-    |> Array.sortByDescending(fun student->student.MeanScore)
+    |> Array.sortBy(fun student->student.FName)
     |> Array.iter StudentModule.printSummary    
 
 [<EntryPoint>]
