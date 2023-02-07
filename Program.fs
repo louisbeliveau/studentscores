@@ -4,10 +4,11 @@ open System.IO
 module Float=
     let tryFromString s=
         if s="N/A" then
-            None
+            Some(float 50.0)
         else
             Some(float s)
 
+    
 type Student=
     {
         Name:string
@@ -34,7 +35,12 @@ module StudentModule=
         MeanScore=meanScore
         MinScore=minScore
         MaxScore=maxScore
-        }    
+        }
+
+    // let fromStringOr50 s=
+    //     if s=="N/A" then
+    //         Float.tryFromString 
+    //     0
 
     let printSummary (student:Student)  =
         printfn "%s\t%s\t%0.1f\t%0.1f\t%0.1f" student.Name student.Id student.MeanScore student.MinScore student.MaxScore
