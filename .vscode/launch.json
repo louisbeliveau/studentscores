@@ -10,7 +10,7 @@
             "request": "launch",
             "preLaunchTask": "build",
             "program": "${workspaceFolder}/bin/Debug/net6.0/studentscores.dll",
-            "args": ["Samples/StudentScoresNA.txt"],
+            "args": ["Samples/StudentScoresAE.txt"],
             "cwd": "${workspaceFolder}",
             "stopAtEntry": false,
             "console": "internalConsole"
