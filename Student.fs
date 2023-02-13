@@ -10,9 +10,22 @@ type Student=
         MaxScore:float
     }
 module StudentModule=
+
+    let nameParts (s:string)=
+        let elements = s.Split(',')
+        match elements with
+        | [|lname;fname|] ->
+            {|Lname=lname.Trim()
+              Fname=fname.Trim()|} 
+        |  [|lname;|] ->
+            {|Lname=lname.Trim()
+              Fname="(None)"  |}      
+        |_ -> raise (System.FormatException($"Invalid name format {s}"))
+
     let fromString(s:string)=
         let elements = s.Split('\t')
-        let name =elements[0].Split(",")
+        let name =elements[0] |> nameParts
+        
         let id=elements[1]
         let scores =
             elements
@@ -24,8 +37,8 @@ module StudentModule=
         let maxScore = scores |> Array.max
         {             
         Id=id
-        FName=name[1]
-        LName=name[0]
+        FName=name.Fname
+        LName=name.Lname
         MeanScore=meanScore
         MinScore=minScore
         MaxScore=maxScore

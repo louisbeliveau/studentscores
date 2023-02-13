@@ -9,8 +9,14 @@ let main argv=
         let filepath = argv[0] 
         if File.Exists filepath then
             printfn "Processing %s" filepath
-            sumarize filepath
-            0
+            try
+                sumarize filepath               
+                0
+            with
+            | :? FormatException as e ->
+                printfn "Error: %s" e.Message
+                printfn "Le fichier n est pas dans le format attendu"
+                1    
         else
             printfn "the file doesnt even exits you freak"
             1 
