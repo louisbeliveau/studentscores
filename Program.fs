@@ -16,7 +16,15 @@ let main argv=
             | :? FormatException as e ->
                 printfn "Error: %s" e.Message
                 printfn "Le fichier n est pas dans le format attendu"
-                1    
+                1
+            | :? System.IO.IOException ->
+                printfn "bloque"
+                2
+
+            | _ as e ->
+                printfn "Unexpected error"
+                3     
+
         else
             printfn "the file doesnt even exits you freak"
             1 

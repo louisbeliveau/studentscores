@@ -42,7 +42,7 @@ module StudentModule=
         MeanScore=meanScore
         MinScore=minScore
         MaxScore=maxScore
-        }
+        }        
 
     let printSummary (student:Student)  =
         printfn "%s\t%s\t%s\t%0.1f\t%0.1f\t%0.1f" student.FName student.LName student.Id student.MeanScore student.MinScore student.MaxScore

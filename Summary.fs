@@ -4,11 +4,14 @@ open System.IO
 
 module Sumary=
     let sumarize (filepath:string)=
-        let rows = File.ReadAllLines filepath
-        let studentcount = rows.Length - 1
+        let rows = 
+            File.ReadLines filepath           
+            |> Seq.cache
+        let studentcount = (rows |> Seq.length) - 1
         printfn "Student count %i" studentcount
         rows 
-        |> Array.skip 1
-        |> Array.map StudentModule.fromString
-        |> Array.sortBy(fun student->student.FName)
-        |> Array.iter StudentModule.printSummary    
+        
+        |> Seq.skip 1
+        |> Seq.map StudentModule.fromString
+        |> Seq.sortBy(fun student->student.FName)
+        |> Seq.iter StudentModule.printSummary    
