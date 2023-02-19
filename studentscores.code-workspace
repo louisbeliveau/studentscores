@@ -8,6 +8,8 @@
 		"FSharp.inlayHints.parameterNames": false,
 		"FSharp.inlayHints.enabled": false,
 		"FSharp.inlayHints.typeAnnotations": false,
-		"editor.selectionClipboard": false
+		"editor.selectionClipboard": false,
+		"FSharp.keywordsAutocomplete": true,
+		"typescript.experimental.tsserver.web.enableProjectWideIntellisense": true
 	}
 }
